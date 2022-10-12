@@ -1,3 +1,35 @@
+body {
+  text-align: center;
+  color: white;
+  overflow-x: hidden;
+}
+
+span {
+  color: red;
+  font-size: 20px;
+}
+
+input[type="text"] {
+  width: 100%;
+  min-height: 30px;
+}
+
+button {
+  height: 37px;
+  width: 102%;
+  margin-left: 5px;
+  background-color: #37af65;
+  margin-top: 20px;
+  padding: 0px;
+  border-radius: 20px;
+  min-height: 50px;
+  cursor: pointer;
+}
+
+select {
+  width: 100%;
+  min-height: 35px;
+}
 .backgroundImage {
   position: fixed;
   top: 0;
@@ -28,9 +60,26 @@
   font-size: larger;
 }
 
+.input {
+  width: 100%;
+  min-height: 30px;
+}
+
 .inputRadio {
   margin: 0 auto 1.25rem auto;
   padding: 0.25rem;
+}
+
+.button {
+  height: 37px;
+  width: 102%;
+  margin-left: 5px;
+  background-color: #37af65;
+  margin-top: 20px;
+  padding: 0px;
+  border-radius: 20px;
+  min-height: 50px;
+  cursor: pointer;
 }
 
 .comments {
