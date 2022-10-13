@@ -1,8 +1,13 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 const db = require("../../util/database");
-export default async function submitForm(req, res) {
-  if (req.body == undefined) return;
-  console.log(req.body);
+
+const submitForm = async (req, res) => {
+  // if (req.body.username == null) {
+  //   return res.status(400);
+  // }
+  console.log("RAY", req.body);
+  console.log("PHILLIP", req.body);
+
   if (req.method === "POST") {
     db.execute(
       "INSERT INTO survey (username, email, age, time, recommendations, champion, improvements, comments ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
@@ -18,25 +23,13 @@ export default async function submitForm(req, res) {
       ]
     )
       .then((result) => {
+        console.log("RICK", result);
         res.send(result);
       })
       .catch((err) => console.log(err));
-
-    const id = req.query.id;
-    const champion = req.query.champion;
-    console.log(id);
-    console.log(champion);
-
-    const [ids] = await db.execute(
-      "SELECT id, champion FROM survey WHERE id <= ?",
-      [id]
-    );
-
-    const filtered = ids.filter((id) => {
-      return id.champion === champion;
-    });
-    return res.status(200).json({ total: ids.length, count: filtered.length });
   } else {
     res.status(418).json({ error: "Im a little teapot" });
   }
-}
+};
+
+export default submitForm;

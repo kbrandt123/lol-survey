@@ -1,15 +1,20 @@
 import Card from "../components/Card";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { withRouter } from "next/router";
 
-const submission = () => {
+const submission = (props) => {
+  console.log(props.router.query);
   const [calc, setCalc] = useState();
   console.log(calc);
-  // let location = useLocation();
-  // const champName = location.state.userdata.champion;
-  // console.log(champName);
-  // const id = location.state.id;
-  // const userName = location.state.userdata.username;
+  const userdata = JSON.parse(props.router.query.userData);
+  const champName = userdata.champion;
+  const id = props.router.query.id;
+  const userName = userdata.username;
+  console.log(userdata);
+  console.log(champName);
+  console.log(id);
+  console.log(userName);
 
   const submissionData = async () => {
     await axios
@@ -32,7 +37,7 @@ const submission = () => {
 
   return (
     <>
-      {/* <Card>
+      <Card>
         <div className="submissionBox">
           <div className="innerBox">
             <h1>
@@ -47,9 +52,9 @@ const submission = () => {
             src={`/images/championImages/${champName}.png`}
           />
         </div>
-      </Card> */}
+      </Card>
     </>
   );
 };
 
-export default submission;
+export default withRouter(submission);

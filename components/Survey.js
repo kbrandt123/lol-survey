@@ -4,6 +4,8 @@ import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/router";
+import { Router } from "react-router-dom";
 
 const champNames = async () => {
   const res = await fetch(
@@ -21,6 +23,7 @@ const champNames = async () => {
 };
 
 const Survey = () => {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -51,19 +54,28 @@ const Survey = () => {
     // return alert("Please select a valid time played");
 
     // return alert("Please select a champion");
+    console.log(data);
+
+    // axios.defaults.headers.post["Content-Type"] = "application/json";
 
     await axios
       .post("/api/submission", data, {
         headers: {
-          "content-type": "application/json",
+          "Content-Type": "application/json",
         },
       })
       .then((resp) => {
-        console.log(resp);
-        // const id = resp.data[0].insertId;
-        // console.log(id);
-        // const userData = JSON.parse(resp.config.data);
-        // console.log(userData.champion);
+        console.log(resp.config.data);
+        const id = resp.data[0].insertId;
+        const userData = JSON.parse(resp.config.data);
+        console.log(userData);
+        router.push({
+          pathname: "/submission",
+          query: {
+            userData: JSON.stringify(userData),
+            id: id,
+          },
+        });
       })
       .catch((err) => console.log(err));
   };
