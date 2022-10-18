@@ -5,7 +5,6 @@ import { useState } from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
-import { Router } from "react-router-dom";
 
 const champNames = async () => {
   const res = await fetch(
@@ -72,7 +71,7 @@ const Survey = () => {
         router.push({
           pathname: "/submission",
           query: {
-            userData: JSON.stringify(userData),
+            ...userData,
             id: id,
           },
         });

@@ -2,12 +2,6 @@
 const db = require("../../util/database");
 
 const submitForm = async (req, res) => {
-  // if (req.body.username == null) {
-  //   return res.status(400);
-  // }
-  console.log("RAY", req.body);
-  console.log("PHILLIP", req.body);
-
   if (req.method === "POST") {
     db.execute(
       "INSERT INTO survey (username, email, age, time, recommendations, champion, improvements, comments ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
@@ -23,7 +17,6 @@ const submitForm = async (req, res) => {
       ]
     )
       .then((result) => {
-        console.log("RICK", result);
         res.send(result);
       })
       .catch((err) => console.log(err));
